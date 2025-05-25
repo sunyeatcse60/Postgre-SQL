@@ -113,4 +113,40 @@ FROM sightings;
 -- Problem -03
 
 SELECT * FROM sightings
-WHERE location LIKE '% Pass'; 
+WHERE location LIKE '% Pass';
+
+
+-- Problem -04
+
+SELECT name, COUNT(sightings.sighting_id) AS total_sightings
+FROM rangers
+LEFT JOIN sightings ON rangers.ranger_id = sightings.ranger_id
+GROUP BY rangers.name
+ORDER BY total_sightings ASC; 
+
+
+
+
+-- Problem -05
+
+SELECT species.common_name 
+FROM species
+LEFT JOIN sightings ON species.species_id = sightings.species_id
+WHERE sightings.sighting_id IS NULL;
+
+
+
+--Problem -06
+
+SELECT species.common_name, sightings.sighting_time, rangers.name
+FROM sightings
+JOIN species ON sightings.species_id = species.species_id
+JOIN rangers ON sightings.ranger_id = rangers.ranger_id
+ORDER BY sighting_time DESC
+LIMIT 2;
+
+
+
+
+-- Problem -07
+
